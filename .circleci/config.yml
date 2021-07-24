@@ -1,20 +1,21 @@
-version: 2
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.4
+
 jobs:
-  test:
-    parallelism: 2
+  build:
     docker:
-      - image: circleci/node
+      - image: cimg/base:stable
     steps:
       - checkout
-      # These two tests should run in parallel. Make it so!
-      - run:
-          Name: split tests
-          command: |
-            ls
-            TEST_FILES=$(circleci tests glob "src/test_goodbye.sh" "src/test_hello.sh" | circleci tests split --split-by=timings)
-            bash $TEST_FILES
+      # Add step below to install Ruby version 2.6.3
+      - ruby/install:
+          version: '2.6.3'
+      
+      - run: ruby -v
+
 workflows:
-  version: 2
-  test:
+  run-jobs:
     jobs:
-      - test
+      - build
