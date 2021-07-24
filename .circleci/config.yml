@@ -14,6 +14,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --immutable
+      # change the versions from v1 to v3 to access the different caches and or incremenet to start from scratch
       - save_cache:
           name: Save Yarn Package Cache
           key: v3yarn-packages-{{ checksum "yarn.lock" }}
