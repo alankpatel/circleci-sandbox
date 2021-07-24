@@ -8,19 +8,17 @@ jobs:
       - checkout
       # Uncomment below and set the key to point to the proper file
       - restore_cache:
-          name: Restore Yarn Package Json Cache
+          name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}          
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --immutable
-      # Uncomment below and set the key to point to the proper file
       - save_cache:
-          name: Save Yarn Package Json Cache
+          name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - .yarn/cache
-            - .yarn/unplugged
+            - ~/.cache/yarn
 
 workflows:
   cache-save-and-restore:
