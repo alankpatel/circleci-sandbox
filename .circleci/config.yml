@@ -1,20 +1,27 @@
-version: 2
+version: 2.1
+
 jobs:
-  test:
-    parallelism: 2
+  build:
     docker:
-      - image: circleci/node
+      - image: cimg/node:12.16
     steps:
       - checkout
-      # These two tests should run in parallel. Make it so!
+      # Uncomment below and set the key to point to the proper file
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          Name: split tests
-          command: |
-            pwd
-            TEST_FILES=$(circleci tests glob "src/test_goodbye.sh" "src/test_hello.sh" | circleci tests split --split-by=timings)
-            bash $TEST_FILES
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
+
 workflows:
-  version: 2
-  test:
+  cache-save-and-restore:
     jobs:
-      - test
+      - build
