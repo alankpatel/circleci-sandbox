@@ -11,7 +11,7 @@ jobs:
           Name: split tests
           command: |
             ls
-            TEST_FILES=$(circleci tests glob "../src/test_goodbye.sh" "../src/test_hello.sh" | circleci tests split --split-by=timings)
+            TEST_FILES=$(circleci tests glob "src/test_goodbye.sh" "src/test_hello.sh" | circleci tests split --split-by=timings)
             bash $TEST_FILES
 workflows:
   version: 2
