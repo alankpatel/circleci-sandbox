@@ -8,7 +8,7 @@ jobs:
       - checkout
       # Uncomment below and set the key to point to the proper file
       - restore_cache:
-          name: Restore Yarn Package Json Cache
+          name: Restore Yarn Package Json Cachee
           keys: yarn-packages-{{ checksum "yarn.lock" }}          
       - run:
           name: Install Dependencies
