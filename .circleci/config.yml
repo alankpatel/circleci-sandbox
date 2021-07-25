@@ -1,25 +1,22 @@
 version: 2.1
-
+orbs:
+  build-tools: circleci/build-tools@2.2.0 # This is an orb. If you are not yet familiar with orbs, we will go over them soon. Orbs allow us to make our configs shorter by allowing us to "import" config in a similar way to a programming language's package manager.
 jobs:
   build:
-    docker:
-      - image: cimg/node:12.16
+    docker: 
+      - image: circleci/node 
     steps:
-      - checkout
-      # Uncomment below and set the key to point to the proper file
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --immutable
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - .yarn/cache
-            - .yarn/unplugged
+      - build-tools/test-results:
+          data-dir: ~/project/results
+          upload: true
+# Add below this line, do not modify above
+      - store_test_results:
+          path: results
+      - store_artifacts:
+          path: results
+          destination: tr1
+
+
 
 workflows:
   cache-save-and-restore:
