@@ -28,7 +28,7 @@ jobs:
     steps:
       - run: echo "console.log('complete')" | node
       - generatelogs:
-          - path: "~/project"
+          path: "~/project"
       - run:
           name: Check for logs - DO NOT MODIFY
           command: |
@@ -37,7 +37,7 @@ jobs:
               exit 1
             fi
       - endMission:
-          - exitCode: 0
+          exitCode: 0
 
 
 
