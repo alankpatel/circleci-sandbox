@@ -12,8 +12,8 @@ jobs:
         - run: pwd
           # Edit below here
         - persist_to_workspace: 
-            root: /tmp/workspace
-            paths: echo-output
+            root: /root/project/app
+            paths: linux
 
   build-windows:
     docker:
@@ -26,8 +26,8 @@ jobs:
         - run: cd ~/project/app && pwd && ls
           # Edit below here
         - persist_to_workspace: 
-            root: /tmp/workspace
-            paths: echo-output
+            root: /root/project/app
+            paths: windows
 
   
   #build-mac:
@@ -49,7 +49,7 @@ jobs:
         - image: node
       steps:
         - attach_workspace:
-            at: /tmp/workspace
+            at: root/project/app
         - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
             path: app
             destination: apps
