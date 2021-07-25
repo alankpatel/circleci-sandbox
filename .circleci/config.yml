@@ -50,9 +50,11 @@ jobs:
       steps:
         - attach_workspace:
             at: root/project/app
+        - run: cp linux/app.linux .
+        - run: cp windows/app.windows .
         - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
             path: app
-            #destination: apps
+            destination: apps
 
 workflows:
   version: 2
