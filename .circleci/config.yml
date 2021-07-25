@@ -52,7 +52,7 @@ jobs:
             at: root/project/app
         - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
             path: app
-            destination: apps
+            #destination: apps
 
 workflows:
   version: 2
