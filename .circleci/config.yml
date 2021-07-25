@@ -13,7 +13,7 @@ jobs:
           # Edit below here
         - persist_to_workspace: 
             root: /root/project/app
-            paths: linux
+            paths: linux/app.linux
 
   build-windows:
     docker:
@@ -27,7 +27,7 @@ jobs:
           # Edit below here
         - persist_to_workspace: 
             root: /root/project/app
-            paths: windows
+            paths: windows/app.windows
 
   
   #build-mac:
