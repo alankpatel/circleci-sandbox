@@ -9,7 +9,7 @@ jobs:
             name: Generate app
             command: echo app >> app/linux/app.linux
         - run: cd ~/project/app && pwd && ls
-        - run: ls /tmp
+        - run: pwd
           # Edit below here
         - persist_to_workspace: 
             root: /tmp/workspace
